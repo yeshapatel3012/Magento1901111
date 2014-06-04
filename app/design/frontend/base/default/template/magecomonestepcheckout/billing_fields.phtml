@@ -33,8 +33,6 @@ $dataHelper = Mage::helper('magecomonestepcheckout');
         </div>';
     ?>
 <?php endif; ?>
-
-
 <?php if(!$this->settings['exclude_telephone']):?>
     <?php $billingFields['telephone'] = '
         <div class="input-box input-telephone'.((in_array('telephone', $formErrors)) ? ' input-error' : '').'">
