@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+    <magecomonestepcheckout_ajax_add_extra_product>
+        <block type="magecomonestepcheckout/summary" name="checkout.cart.totals" as="summary" template="magecomonestepcheckout/summary.phtml" output="toHtml" />
+    </magecomonestepcheckout_ajax_add_extra_product>
+
+    <magecomonestepcheckout_ajax_set_methods_separate>
+        <block output="toHtml" type="core/template" name="set_methods_result" as="set_methods_result" template="magecomonestepcheckout/set_methods_separate.phtml" >
+            <block type="magecomonestepcheckout/summary" as="summary" name="magecomonestepcheckout.summary" template="magecomonestepcheckout/summary.phtml">
+                    <block type="core/template" as="preview" name="magecomonestepcheckout.summary.preview" template="magecomonestepcheckout/preview/preview.phtml" />
+                </block>
+            <block type="checkout/onepage_payment_methods" name="choose-payment-method" template="magecomonestepcheckout/payment_method.phtml" as="choose-payment-method">
+                <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+            </block>
+        </block>
+    </magecomonestepcheckout_ajax_set_methods_separate>
+
+    <magecomonestepcheckout_ajax_paymentrefresh>
+        <block output="toHtml" type="core/template" name="paymentrefresh_result" template="magecomonestepcheckout/set_methods_separate.phtml" >
+            <block type="magecomonestepcheckout/summary" as="summary" name="magecomonestepcheckout.summary" template="magecomonestepcheckout/summary.phtml">
+                    <block type="core/template" as="preview" name="magecomonestepcheckout.summary.preview" template="magecomonestepcheckout/preview/preview.phtml" />
+                </block>
+            <block type="checkout/onepage_payment_methods" name="choose-payment-method" template="magecomonestepcheckout/payment_method.phtml" as="choose-payment-method">
+                <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+            </block>
+        </block>
+    </magecomonestepcheckout_ajax_paymentrefresh>
+
+    <magecomonestepcheckout_ajax_save_billing>
+        <block output="toHtml" type="magecomonestepcheckout/billing" name="billing" as="billing" template="magecomonestepcheckout/billing.phtml">
+            <block type="checkout/onepage_payment_methods" name="choose-payment-method" template="magecomonestepcheckout/payment_method.phtml" as="choose-payment-method">
+                <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+            </block>
+            <block type="checkout/onepage_shipping_method_available" name="choose-shipping-method" template="magecomonestepcheckout/shipping_method.phtml" as="choose-shipping-method" />
+            <block type="magecomonestepcheckout/summary" as="summary" name="magecomonestepcheckout.summary" template="magecomonestepcheckout/summary.phtml">
+                <block type="core/template" as="preview" name="magecomonestepcheckout.summary.preview" template="magecomonestepcheckout/preview/preview.phtml" />
+            </block>
+            <block type="checkout/cart_totals" name="checkout.cart.totals" as="totals" template="checkout/cart/totals.phtml"/>
+        </block>
+    </magecomonestepcheckout_ajax_save_billing>
+
+    <magecomonestepcheckout_index_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+            <action method="setHeaderTitle" translate="title"><title>Checkout</title></action>
+        </reference>
+        <reference name="head">
+            <action method="setTitle" translate="title"><title>One Step Checkout</title></action>
+            <action method="addItem"><type>skin_js</type><name>magecomonestepcheckout/js/window.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>magecomonestepcheckout/js/magecomonestepcheckout.js</name></action>
+            <action method="addCss"><stylesheet>magecomonestepcheckout/magecomonestepcheckout.css</stylesheet></action>
+        </reference>
+        <reference name="content">
+            <block type="magecomonestepcheckout/checkout" name="magecomonestepcheckout.checkout" template="magecomonestepcheckout/checkout.phtml">
+                <block type="checkout/agreements" name="checkout.onepage.agreements" as="agreements" template="magecomonestepcheckout/agreements.phtml"/>
+                <block type="magecomonestepcheckout/fields" as="billing_address" name="magecomonestepcheckout.billing.address" template="magecomonestepcheckout/billing_fields.phtml" />
+                <block type="magecomonestepcheckout/fields" as="shipping_address" name="magecomonestepcheckout.shipping.address" template="magecomonestepcheckout/shipping_fields.phtml" />
+                <block type="magecomonestepcheckout/summary" as="summary" name="magecomonestepcheckout.summary" template="magecomonestepcheckout/summary.phtml" />
+                <block type="checkout/onepage_payment_methods" name="choose-payment-method" template="magecomonestepcheckout/payment_method.phtml">
+                    <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+                </block>
+                <block type="checkout/onepage_shipping_method_available" name="choose-shipping-method" template="magecomonestepcheckout/shipping_method.phtml"/>
+            </block>
+        </reference>
+        <reference name="before_body_end">
+            <block type="core/template" template="magecomonestepcheckout/login_popup.phtml" name="login-popup" />
+            <block type="core/template" as="preview" name="magecomonestepcheckout.summary.preview" template="magecomonestepcheckout/preview/preview.phtml" />
+        </reference>
+    </magecomonestepcheckout_index_index>
+    <checkout_onepage_success translate="label">
+            <reference name="content">
+                <block type="magecomonestepcheckout/register" name="magecomonestepcheckout.register" template="magecomonestepcheckout/register.phtml">
+                    <block type="magecomonestepcheckout/register" name="customer_form_register" template="magecomonestepcheckout/register_form.phtml"/>
+                </block>
+            </reference>
+    </checkout_onepage_success>
+</layout>

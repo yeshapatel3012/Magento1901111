@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Ys_MagecomOneStepCheckout>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Ys_MagecomOneStepCheckout>
+    </modules>
+</config>
